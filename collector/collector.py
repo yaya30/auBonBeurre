@@ -13,14 +13,14 @@ class ThreadForCLient(threading.Thread):
         # Get unit_id in title
         unit_id = title[11:12]
         print("unit_id is ", unit_id)
-        with open("./unit/data/"+title,'r') as jsonFile:
+        with open("./data/"+title,'r') as jsonFile:
             jsonObject = json.load(jsonFile)
             jsonOther = jsonFile
             jsonFile.close()
         
         print("le fichier à lire est : ", jsonObject['data'][0])
 #----------------------------------------------------------
-host, port = ('',5566)
+host, port = (socket.gethostbyname('reseauProduct'),5566)
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.bind((host, port))

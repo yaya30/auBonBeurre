@@ -1,0 +1,37 @@
+version: "3"
+services:
+
+  mariadb:
+    image: "mariadb:latest"
+    restart: 'always'
+    volumes: 
+      - mariadb_data:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "Unites"
+      MYSQL_USER: "first"
+      MYSQL_PASSWORD: "first"
+    ports:
+      - 3309:3309
+
+  unit1:
+    build: ./unit/unit1
+    networks: 
+      - reseauProduct
+    volumes:
+      - "./unit/data:/app/data"
+    restart: always
+
+  collector:
+    build: ./collector
+    networks: 
+      - reseauProduct
+    volumes:
+      - "./unit/data:/app/data"
+    # ports:
+    #   - "5566:5566"
+    restart: always
+networks:
+  reseauProduct:
+volumes:
+  mariadb_data:
