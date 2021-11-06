@@ -1,7 +1,7 @@
 FROM python:3.9-slim-bullseye
 
 RUN apt-get update -y && \
-    apt-get install -y python3-pip python3-dev
+    apt-get install -y python3-pip python3-dev 
 # set the working directory in the container
 WORKDIR /app
 
@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # command to run on container start
-CMD [ "python", "./unit.py" ]
+CMD [ "python", "./socket-client.py" ]

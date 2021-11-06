@@ -1,0 +1,2 @@
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' __name__
+docker-compose up -d --force-recreate --no-deps --build collector

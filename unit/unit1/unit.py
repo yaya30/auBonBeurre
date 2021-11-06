@@ -18,7 +18,7 @@ def generateAuto(x):
     return automate
 def auto() : 
     gen=(generateAuto(x) for x in range(10))
-    return json.dumps({'data':list(gen)}) , time.time()
+    return {'data':list(gen)} , time.time()
 
 
 

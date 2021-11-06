@@ -1,37 +1,62 @@
 version: "3"
 services:
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "90:80"
+    environment:
+      - PMA_HOST= databaseMysql
+      - PMA_USER= first
+      - PMA_PASSWORD=first
 
   mariadb:
+    container_name : database_maria
     image: "mariadb:latest"
-    restart: 'always'
     volumes: 
       - mariadb_data:/var/lib/mysql/
+      - "./schema.sql:/docker-entrypoint-initdb.d/init.sql"
+    networks: 
+      reseauProduct:
+        ipv4_address: 172.168.1.4
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "Unites"
       MYSQL_USER: "first"
       MYSQL_PASSWORD: "first"
     ports:
-      - 3309:3309
+      - "3309:3309"
+    
 
   unit1:
+    container_name: unit1_con
     build: ./unit/unit1
     networks: 
       - reseauProduct
     volumes:
       - "./unit/data:/app/data"
-    restart: always
 
   collector:
+    container_name: collector_con
+    depends_on: 
+      - mariadb
     build: ./collector
     networks: 
-      - reseauProduct
+      reseauProduct:
+        ipv4_address: 172.168.1.2
     volumes:
       - "./unit/data:/app/data"
-    # ports:
-    #   - "5566:5566"
+    ports:
+      - "5566:5566"
     restart: always
 networks:
   reseauProduct:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.168.1.0/24"
+          gateway: "172.168.1.1"
+  
+  
 volumes:
   mariadb_data:
