@@ -1,20 +1,20 @@
-import mysql.connector
-
-def insertBdd(unit_id,jsonObject):
+import mariadb
+def insertBdd(unit_id):
     try:
-        mydb = mysql.connector.connect(
-            host="localhost",
+        mydb = mariadb.connect(
+            host="mariadb",
             user="root",
+            port=3309,
             password="root",
             database = "Unites"
         )
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT id FROM automate where unit_id = %s and  num_automate = %s")
+        mycursor.execute("show databases;")
         myresult = mycursor.fetchone()
         print("result select :",myresult)
         # sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
         
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))
 
 

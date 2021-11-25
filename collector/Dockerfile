@@ -2,7 +2,8 @@ FROM python:3.9-slim-bullseye
 
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev && \
-    apt-get install -y default-libmysqlclient-dev build-essential
+    apt-get install -y default-libmysqlclient-dev build-essential && \
+    apt-get install nano
 # set the working directory in the container
 WORKDIR /app
 

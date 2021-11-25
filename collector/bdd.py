@@ -8,9 +8,9 @@ class bddConnection():
     def runConnect(self):
         try:
             conn = mariadb.connect(
-                user="first",
-                password="first",
-                host="172.168.1.4",
+                user="root",
+                password="root",
+                host="localhost",
                 port=3309,
                 database="Unites"
                 )

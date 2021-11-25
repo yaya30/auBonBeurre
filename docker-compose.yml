@@ -29,6 +29,8 @@ services:
 
   unit1:
     container_name: unit1_con
+    depends_on: 
+      - mariadb
     build: ./unit/unit1
     networks: 
       - reseauProduct
