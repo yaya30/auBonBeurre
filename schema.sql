@@ -31,3 +31,14 @@ create table fact_automate (
 create table unit(
     id INT PRIMARY KEY AUTO_INCREMENT
 );
+
+Insert into unit (id) values (1) (2) (3) (4) (5);
+
+DELIMITER //
+FOR i IN 1..10
+DO
+    Insert into automate (unit_id,num_automate,type_auto)
+    values(1,i,'default');
+END FOR;
+//
+DELIMITER;

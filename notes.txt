@@ -3,3 +3,7 @@ docker-compose logs collector
 docker exec -it collector_con bash
 docker-compose build --no-cache
 docker-compose run unit1
+nano etc/mysql/mariadb.conf.d/50-server.cnf
+    ==> bind-address = 0.0.0.0
+nano etc/mysql/my.cnf        
+        => port = 3309
